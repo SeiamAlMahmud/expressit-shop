@@ -10,7 +10,7 @@ import { getNames } from 'country-list';
 import { toast } from 'sonner';
 
 const schema = yup.object().shape({
-  storeName: yup
+  name: yup
     .string()
     .min(3, 'Store name must be at least 3 characters')
     .required(),
@@ -22,7 +22,7 @@ const schema = yup.object().shape({
     )
     .required(),
   email: yup.string().email('Invalid email format').required(),
-  location: yup.string().required('Please select a country'),
+  country: yup.string().required('Please select a country'),
   category: yup.string().required('Please select a category'),
   currency: yup.string().required('Please select a currency'),
 });
@@ -35,10 +35,10 @@ export default function StoreForm() {
 
   const formik = useFormik({
     initialValues: {
-      storeName: '',
+      name: '',
       subdomain: '',
       email: '',
-      location: 'Bangladesh',
+      country: 'Bangladesh',
       category: '',
       currency: '',
     },
@@ -115,10 +115,10 @@ export default function StoreForm() {
         <input
           type="text"
           className="border p-2 w-full"
-          {...formik.getFieldProps('storeName')}
+          {...formik.getFieldProps('name')}
         />
-        {formik.touched.storeName && formik.errors.storeName && (
-          <p className="text-red-500 text-sm">{formik.errors.storeName}</p>
+        {formik.touched.name && formik.errors.name && (
+          <p className="text-red-500 text-sm">{formik.errors.name}</p>
         )}
 
         {/* Email */}
@@ -132,11 +132,11 @@ export default function StoreForm() {
           <p className="text-red-500 text-sm">{formik.errors.email}</p>
         )}
 
-        {/* Location */}
-        <label className="block text-sm font-semibold">Location</label>
+        {/* country */}
+        <label className="block text-sm font-semibold">country</label>
         <select
           className="border p-2 w-full"
-          {...formik.getFieldProps('location')}
+          {...formik.getFieldProps('country')}
         >
           <option value="">Select Country</option>
           {getNames().map((country) => (
@@ -145,8 +145,8 @@ export default function StoreForm() {
             </option>
           ))}
         </select>
-        {formik.touched.location && formik.errors.location && (
-          <p className="text-red-500 text-sm">{formik.errors.location}</p>
+        {formik.touched.country && formik.errors.country && (
+          <p className="text-red-500 text-sm">{formik.errors.country}</p>
         )}
 
         {/* Category */}
