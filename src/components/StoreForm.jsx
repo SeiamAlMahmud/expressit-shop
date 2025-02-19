@@ -102,7 +102,7 @@ export default function StoreForm() {
   }, [formik.values.domain, checkSubdomain]);
 
   return (
-    <div className="p-6 mx-6 max-w-3xl w-full  bg-white shadow-md rounded-lg text-black">
+    <div className="p-6 mx-6 my-12 max-w-3xl w-full  bg-white shadow-md rounded-lg text-black">
       <h2 className="text-2xl font-bold mb-4">Create Your Store</h2>
       <h4 className="border-b-[3px] border-b-slate-200 pb-2">
         Add ypur basic store information and compolete the setup
@@ -314,17 +314,19 @@ export default function StoreForm() {
         </div>
 
         {/* Submit Button */}
-        <button
-          type="submit"
-          disabled={!formik.isValid || isAvailable}
-          className={`text-white p-2 rounded w-full ${
-            !formik.isValid || isAvailable
-              ? 'cursor-not-allowed bg-blue-200'
-              : 'cursor-pointer bg-blue-500'
-          }`}
-        >
-          Create Store
-        </button>
+        <div className="flex justify-end">
+          <button
+            type="submit"
+            disabled={!formik.isValid || isAvailable}
+            className={`text-white p-2 rounded w-28 duration-300 ${
+              !formik.isValid || isAvailable
+                ? 'cursor-not-allowed bg-purple-300 hover:bg-purple-200'
+                : 'cursor-pointer bg-purple-600 hover:bg-purple-700'
+            }`}
+          >
+            Create Store
+          </button>
+        </div>
       </form>
     </div>
   );
