@@ -14,11 +14,11 @@ const schema = yup.object().shape({
     .string()
     .min(3, 'Store name must be at least 3 characters')
     .required(),
-  subdomain: yup
+  domain: yup
     .string()
     .matches(
       /^[a-z0-9-]+$/,
-      'Subdomain must be lowercase and contain only letters, numbers, and hyphens'
+      'Domain must be lowercase and contain only letters, numbers, and hyphens'
     )
     .required(),
   email: yup.string().email('Invalid email format').required(),
@@ -36,7 +36,7 @@ export default function StoreForm() {
   const formik = useFormik({
     initialValues: {
       name: '',
-      subdomain: '',
+      domain: '',
       email: '',
       country: 'Bangladesh',
       category: '',
@@ -46,7 +46,11 @@ export default function StoreForm() {
     validateOnChange: true,
     onSubmit: async (values) => {
       if (isAvailable) {
-        toast.error('Subdomain already exists!');
+        toast.error('Domain already exists!');
+        return;
+      }
+      if (values.country.toLowerCase() !== 'bangladesh') {
+        toast.error('Only Bangladesh is supported!');
         return;
       }
       try {
@@ -54,7 +58,7 @@ export default function StoreForm() {
           'https://interview-task-green.vercel.app/task/stores/create',
           values
         );
-        router.push('/products');
+        // router.push('/products');
       } catch (error) {
         console.error('Store creation failed:', error);
       }
@@ -80,10 +84,10 @@ export default function StoreForm() {
   }, 500);
 
   useEffect(() => {
-    if (formik.values.subdomain) {
-      checkSubdomain(formik.values.subdomain);
+    if (formik.values.domain) {
+      checkSubdomain(formik.values.domain);
     }
-  }, [formik.values.subdomain]);
+  }, [formik.values.domain]);
 
   return (
     <div className="p-6 max-w-lg mx-auto bg-white shadow-md rounded-lg text-black">
@@ -97,12 +101,12 @@ export default function StoreForm() {
             type="text"
             className="border p-2 w-full"
             placeholder="yourstore"
-            {...formik.getFieldProps('subdomain')}
+            {...formik.getFieldProps('domain')}
           />
           <span className="ml-2">.expressitbd.com</span>
         </div>
         {loading && <p>Checking availability...</p>}
-        {!loading && formik.values.subdomain && (
+        {!loading && formik.values.domain && (
           <p
             className={`text-sm ${isAvailable ? 'text-red-500' : 'text-green-500'}`}
           >
@@ -133,7 +137,7 @@ export default function StoreForm() {
         )}
 
         {/* country */}
-        <label className="block text-sm font-semibold">country</label>
+        <label className="block text-sm font-semibold">Country</label>
         <select
           className="border p-2 w-full"
           {...formik.getFieldProps('country')}
