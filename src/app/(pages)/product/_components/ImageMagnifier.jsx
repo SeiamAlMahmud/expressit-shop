@@ -22,7 +22,7 @@ const ImageMagnifier = ({ displayImage }) => {
         className="w-full  aspect-[548/712] object-cover"
       />
       <div
-        className="absolute top-0 left-0 w-32 h-32 bg-black bg-opacity-50 rounded-full"
+        className="absolute top-1 left-1 w-14 h-14 sm:w-24 sm:h-24 md:w-32 md:h-32 bg-black bg-opacity-50 rounded-full"
         style={{
           backgroundPosition: `${mousePosition.x}% ${mousePosition.y}%`,
           backgroundImage: `url(${displayImage})`,

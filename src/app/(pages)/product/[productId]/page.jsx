@@ -7,6 +7,7 @@ import ProductInfo from '../_components/ProductInfo';
 import AddButtons from '../_components/AddButtons';
 import Sizes from '../_components/Sizes';
 import ProductDetails from '../_components/ProductDetails';
+import TimeLeft from '../_components/TimeLeft';
 
 export default function ProductDetail({ params }) {
   const resolvedParams = use(params);
@@ -85,6 +86,7 @@ export default function ProductDetail({ params }) {
               <div>
                 <Sizes />
                 <AddButtons />
+                <TimeLeft />
               </div>
               <hr className="my-6 border-gray-300" />
               <ProductInfo />

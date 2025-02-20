@@ -284,7 +284,6 @@ export default function StoreForm() {
                 {...formik.getFieldProps('currency')}
               >
                 <option value="">Select Currency</option>
-                <option value="USD">USD</option>
                 <option value="BDT">BDT</option>
               </select>
               {formik.touched.currency && formik.errors.currency && (
