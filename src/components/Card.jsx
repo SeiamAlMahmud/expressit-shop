@@ -7,7 +7,7 @@ import { FiArrowUpRight } from 'react-icons/fi';
 import { FaStar } from 'react-icons/fa';
 import { RiHeartAddLine, RiHeartFill } from 'react-icons/ri';
 import Link from 'next/link';
-import { ShoppingCart } from 'lucide-react';
+import { Flame, Leaf, ShoppingCart } from 'lucide-react';
 
 const ProductCard = ({ product }) => {
   const [isFavorite, setIsFavorite] = useState(false);
@@ -18,12 +18,18 @@ const ProductCard = ({ product }) => {
       <span className="bg-red-500 rounded-b-md px-3 py-1 text-[0.9rem] text-white absolute top-0 left-4">
         Best Value
       </span>
+      <span
+        title={product.status == true ? 'available' : 'stock out'}
+        className={` ${product.status == true ? 'bg-green-500' : 'bg-red-500'} rounded-full p-1 text-[0.9rem] text-white absolute top-2 right-4 cursor-pointer`}
+      >
+        {product.status == true ? <Leaf size={18} /> : <Flame size={18} />}
+      </span>
 
       {/* product image */}
       <Link href={`/product/${product._id}`}>
         <img
           alt="product/image"
-          src={product.images[0].secure_url}
+          src={product.images[0].optimizeUrl}
           className="w-full  aspect-[16/10] object-cover mt-0"
         />
       </Link>
@@ -31,7 +37,6 @@ const ProductCard = ({ product }) => {
       <div className="p-4 pt-0">
         <h3 className="text-[1.4rem] font-semibold mb-1 mt-2">
           <Link href={`/product/${product._id}`}>{product.name}</Link>
-          {product.name}
         </h3>
 
         <span className="text-[0.9rem] font-normal text-gray-500 line-clamp-2">
