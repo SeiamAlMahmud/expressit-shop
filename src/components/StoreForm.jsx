@@ -6,6 +6,8 @@ import * as yup from 'yup';
 import { useRouter } from 'next/navigation';
 import axios from 'axios';
 import { debounce } from 'lodash';
+import { useWindowSize } from 'react-use';
+import Confetti from 'react-confetti';
 import { getNames } from 'country-list';
 import { toast } from 'sonner';
 import {
@@ -40,6 +42,9 @@ export default function StoreForm() {
   const [subdomainMsg, setSubdomainMsg] = useState('');
   const [isAvailable, setIsAvailable] = useState(true);
   const [loading, setLoading] = useState(false);
+  const { width, height } = useWindowSize();
+  const [showConfetti, setShowConfetti] = useState(false);
+  console.log('first', width, height);
 
   const formik = useFormik({
     initialValues: {
@@ -66,7 +71,12 @@ export default function StoreForm() {
           'https://interview-task-green.vercel.app/task/stores/create',
           values
         );
-        router.push('/products');
+        setShowConfetti(true);
+        const confettiTimeOut = setTimeout(() => {
+          setShowConfetti(false);
+          router.push('/products');
+        }, 3000);
+        () => clearTimeout(confettiTimeOut);
       } catch (error) {
         console.error('Store creation failed:', error);
       }
@@ -103,6 +113,7 @@ export default function StoreForm() {
 
   return (
     <div className="p-6 mx-6 my-12 max-w-3xl w-full  bg-white shadow-md rounded-lg text-black">
+      {showConfetti && <Confetti width={width} height={height} />}
       <h2 className="text-2xl font-bold mb-4">Create Your Store</h2>
       <h4 className="border-b-[3px] border-b-slate-200 pb-2">
         Add ypur basic store information and compolete the setup
