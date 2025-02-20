@@ -22,7 +22,7 @@ export default function ProductDetail({ params }) {
     async function fetchProduct() {
       try {
         const res = await axios.get(
-          'https://glore-bd-backend-node-mongo.vercel.app/api/product'
+          `https://glore-bd-backend-node-mongo.vercel.app/api/product`
         );
         const foundProduct = res.data.data.find((p) => p._id === productId);
 
@@ -63,7 +63,7 @@ export default function ProductDetail({ params }) {
     return (
       <p className="text-center text-lg text-red-500 font-semibold">{error}</p>
     );
-  console.log(displayImage);
+
   return (
     <>
       <div className="font-[sans-serif] p-4">

@@ -26,6 +26,7 @@ const schema = yup.object().shape({
     .required(),
   domain: yup
     .string()
+    .min(3, 'Store name must be at least 3 characters')
     .matches(
       /^[a-z0-9-]+$/,
       'Domain must be lowercase and contain only letters, numbers, and hyphens'
@@ -44,7 +45,6 @@ export default function StoreForm() {
   const [loading, setLoading] = useState(false);
   const { width, height } = useWindowSize();
   const [showConfetti, setShowConfetti] = useState(false);
-  console.log('first', width, height);
 
   const formik = useFormik({
     initialValues: {
@@ -68,14 +68,14 @@ export default function StoreForm() {
       }
       try {
         await axios.post(
-          'https://interview-task-green.vercel.app/task/stores/create',
+          `https://interview-task-green.vercel.app/task/stores/create`,
           values
         );
         setShowConfetti(true);
         const confettiTimeOut = setTimeout(() => {
-          setShowConfetti(false);
           router.push('/products');
-        }, 3000);
+          setShowConfetti(false);
+        }, 3500);
         () => clearTimeout(confettiTimeOut);
       } catch (error) {
         console.error('Store creation failed:', error);
@@ -182,9 +182,9 @@ export default function StoreForm() {
             {loading && <p>Checking availability...</p>}
             {!loading && formik.values.domain && (
               <p
-                className={`text-sm ${isAvailable ? 'text-red-500' : 'text-green-500'}`}
+                className={`text-sm ${formik.errors.domain || isAvailable ? 'text-red-500' : 'text-green-500'}`}
               >
-                {subdomainMsg}
+                {formik.errors.domain || subdomainMsg}
               </p>
             )}
           </div>
@@ -329,9 +329,9 @@ export default function StoreForm() {
         <div className="flex justify-end">
           <button
             type="submit"
-            disabled={!formik.isValid || isAvailable}
+            disabled={isAvailable || !formik.isValid}
             className={`text-white p-2 rounded w-28 duration-300 ${
-              !formik.isValid || isAvailable
+              isAvailable || !formik.isValid
                 ? 'cursor-not-allowed bg-purple-300 hover:bg-purple-200'
                 : 'cursor-pointer bg-purple-600 hover:bg-purple-700'
             }`}

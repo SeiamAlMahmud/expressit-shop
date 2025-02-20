@@ -9,7 +9,7 @@ export default function Products() {
 
   useEffect(() => {
     axios
-      .get('https://glore-bd-backend-node-mongo.vercel.app/api/product')
+      .get(`https://glore-bd-backend-node-mongo.vercel.app/api/product`)
       .then((res) => {
         setProducts(res.data.data);
         setLoading(false);
