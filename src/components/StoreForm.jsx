@@ -129,6 +129,7 @@ export default function StoreForm() {
             <div className="flex items-start mb-2 flex-col">
               <input
                 type="text"
+                placeholder="How'd you like to call your store?"
                 className={`border p-2 w-full mb-2 rounded-sm ${isAvailable && formik.errors.name ? 'border-red-500' : ''}`}
                 {...formik.getFieldProps('name')}
               />
@@ -160,7 +161,7 @@ export default function StoreForm() {
               <input
                 type="text"
                 className={`border p-2 pr-28 w-full rounded-sm ${isAvailable && formik.values.domain ? 'border-red-500' : ''}`}
-                placeholder="yourstore"
+                placeholder="enter your domain name"
                 {...formik.getFieldProps('domain')}
               />
               <span className="ml-2 absolute right-1 bottom-3 text-sm">
@@ -303,6 +304,7 @@ export default function StoreForm() {
             <div className="flex items-start mb-2 flex-col">
               <input
                 type="email"
+                placeholder="you@example.com"
                 className={`border p-2 w-full rounded-sm ${isAvailable && formik.errors.name ? 'border-red-500' : ''}`}
                 {...formik.getFieldProps('email')}
               />
