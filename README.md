@@ -131,7 +131,7 @@ npm start
 
 ---
 
-## Submission s
+## Submission 
 
 - **Deadline:** Submit by **23 February, 10:00 AM**.
 - **Submission:**
