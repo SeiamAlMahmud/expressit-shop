@@ -143,9 +143,9 @@ npm start
 
 For any queries, reach out via:
 
-- **Email:** mozzammelridoy5iii@gmail.com
-- **Phone:** +8809696325199
-- **WhatsApp:** +8801724-171556
+- **Email:** samahmud49@gmail.com
+- **Phone:** +8801767907675
+- **WhatsApp:** +8801576583150
 
 ---
 
@@ -187,5 +187,4 @@ src/
 │     └─ sonner.jsx
 └─ lib/
    └─ utils.js
-
 ```
